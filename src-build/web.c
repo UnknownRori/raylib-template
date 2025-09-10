@@ -36,8 +36,8 @@ int build_dist()
     nob_mkdir_if_not_exists(DIST_PATH);
 
 
-    const char* output_exe = nob_temp_sprintf("%s/%s.html", BUILD_PATH, PROJECT_NAME);
-    const char* out = nob_temp_sprintf("%s/%s.html", DIST_PATH, PROJECT_NAME);
+    const char* output_exe = nob_temp_sprintf("./index.html");
+    const char* out = nob_temp_sprintf("%s/index.html", DIST_PATH);
 
     nob_copy_file(output_exe, out);
 
