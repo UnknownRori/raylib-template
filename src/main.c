@@ -1,20 +1,40 @@
-#include <stdio.h>
 #include <raylib.h>
+#include "./include/game.h"
 
-int main(void) {
-    InitWindow(900, 600, "Huntress");
 
-    Color background = (Color) {
-        .a = 255,
-        .b = 50,
-        .g = 50,
-        .r = 200,
-    };
+#if defined(PLATFORM_WEB)
+#include <emscripten/emscripten.h>
+#endif
 
-    while (!WindowShouldClose()) {
-        BeginDrawing();
-        ClearBackground(background);
-        EndDrawing();
+void UpdateGame(void);
+
+int main(void)
+{
+    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Salvager");
+    if (FULLSCREEN) {
+        ToggleFullscreen();
     }
+
+    InitAudioDevice();
+    GameInit();
+
+#if defined(PLATFORM_WEB)
+    emscripten_set_main_loop(UpdateGame, 0, 1);
+#else
+    SetTargetFPS(60);
+    while (!WindowShouldClose())
+    {
+        if (ShouldGameQuit()) break;
+        UpdateGame();
+    }
+#endif
+
+    GameUnload();
+    CloseWindow();
+
     return 0;
+}
+
+void UpdateGame(void) {
+  GameLoop();
 }

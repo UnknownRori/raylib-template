@@ -40,6 +40,22 @@ int build_dist()
     const char* out = nob_temp_sprintf("%s/%s.html", DIST_PATH, PROJECT_NAME);
 
     nob_copy_file(output_exe, out);
+
+    output_exe = nob_temp_sprintf("%s/%s.js", BUILD_PATH, PROJECT_NAME);
+    out = nob_temp_sprintf("%s/%s.js", DIST_PATH, PROJECT_NAME);
+
+    nob_copy_file(output_exe, out);
+
+    output_exe = nob_temp_sprintf("%s/%s.wasm", BUILD_PATH, PROJECT_NAME);
+    out = nob_temp_sprintf("%s/%s.wasm", DIST_PATH, PROJECT_NAME);
+
+    nob_copy_file(output_exe, out);
+
+    output_exe = nob_temp_sprintf("%s/%s.data", BUILD_PATH, PROJECT_NAME);
+    out = nob_temp_sprintf("%s/%s.data", DIST_PATH, PROJECT_NAME);
+
+    nob_copy_file(output_exe, out);
+
     const char* resources = DIST_PATH"/resources";
     nob_copy_directory_recursively("./resources", resources);
 }
@@ -53,8 +69,6 @@ int build_project()
     Nob_File_Paths project_obj = {0};
     Nob_Procs project_procs = {0};
     nob_mkdir_if_not_exists(project_build_path);
-    const char* scene_path = nob_temp_sprintf("%s/scene", project_build_path);
-    nob_mkdir_if_not_exists(scene_path);
 
     for (size_t i = 0; i < NOB_ARRAY_LEN(minijam_module); i++) {
         const char* in_path = nob_temp_sprintf("src/%s.c", minijam_module[i]);

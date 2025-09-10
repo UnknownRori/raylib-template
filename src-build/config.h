@@ -22,7 +22,11 @@ char* raylib_module[] = {
 };
 
 char* minijam_module[] = {
-    "main"
+    "main",
+    "game",
+};
+
+char* minijam_module_dir[] = {
 };
 
 int build_raylib();

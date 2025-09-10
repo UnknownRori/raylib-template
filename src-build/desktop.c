@@ -59,8 +59,6 @@ int build_project()
     Nob_File_Paths project_obj = {0};
     Nob_Procs project_procs = {0};
     nob_mkdir_if_not_exists(project_build_path);
-    const char* scene_path = nob_temp_sprintf("%s/scene", project_build_path);
-    nob_mkdir_if_not_exists(scene_path);
 
     for (size_t i = 0; i < NOB_ARRAY_LEN(minijam_module); i++) {
         const char* in_path = nob_temp_sprintf("src/%s.c", minijam_module[i]);
