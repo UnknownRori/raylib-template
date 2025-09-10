@@ -115,6 +115,7 @@ int build_project()
         nob_cmd_append(&cmd, "-L./build/raylib/");
         nob_cmd_append(&cmd, "-I./build/raylib/");
         nob_cmd_append(&cmd, "-DPLATFORM_WEB");
+        nob_cmd_append(&cmd, "-DGRAPHICS_API_OPENGL_ES2");
         nob_cmd_append(&cmd, "--preload-file", "resources");
         nob_cmd_append(&cmd, "-s", "ASSERTIONS");
         nob_cmd_append(&cmd, "-s", "USE_GLFW=3");
@@ -161,7 +162,7 @@ int build_raylib()
 #endif
             nob_cc_inputs(&cmd, "-c", in_path);
             nob_cmd_append(&cmd, "-I./raylib/src/external/glfw/include/");
-            nob_cmd_append(&cmd, "-DPLATFORM_WEB");
+            nob_cmd_append(&cmd, "-DPLATFORM_WEB", "-DGRAPHICS_API_OPENGL_ES2");
             nob_cc_output(&cmd, out_path);
 
             Nob_Proc proc = nob_cmd_run_async(cmd);
